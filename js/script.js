@@ -1,4 +1,4 @@
-﻿const obs = new OBSWebSocket();
+const obs = new OBSWebSocket();
 let boundsTypeName = [ "OBS_BOUNDS_NONE", "OBS_BOUNDS_STRETCH", "OBS_BOUNDS_SCALE_INNER", "OBS_BOUNDS_SCALE_OUTER", "OBS_BOUNDS_SCALE_TO_WIDTH", "OBS_BOUNDS_SCALE_TO_HEIGHT", "OBS_BOUNDS_MAX_ONLY" ];
 
 $(function() {
@@ -89,13 +89,13 @@ $(function() {
                 reverse = false;
                 break;
             case 'text':
-                arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_ft2_source_v2'];
+                arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_gdiplus_v3', 'text_ft2_source_v2'];
                 break;
             case 'browser':
                 arr = ['browser_source'];
                 break;
             case 'other':
-                arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_ft2_source_v2', 'browser_source'];
+                arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_gdiplus_v3', 'text_ft2_source_v2', 'browser_source'];
                 reverse = false;
                 break;
         }
@@ -295,7 +295,7 @@ function getRequest( source ) {
         $('[name="obs_c_view_W"]',  elm).val( round( data.width, 1) );
         $('[name="obs_c_view_H"]',  elm).val( round( data.height, 1) );
 
-        arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_ft2_source', 'text_ft2_source_v2'];
+        arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_gdiplus_v3', 'text_ft2_source', 'text_ft2_source_v2'];
         if(arr.indexOf(source.type) >= 0) {
             obs.send('GetSourceSettings', { 'sourceName' : source.name } ).then(data => {
                 $('[name="obs_c_text"]', elm).val( data.sourceSettings.text );
@@ -431,7 +431,7 @@ function sendRequest( i, elm ) {
     
     obs.send('SetSceneItemProperties', param );
 
-    arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_ft2_source', 'text_ft2_source_v2'];
+    arr = ['text_gdiplus', 'text_gdiplus_v2', 'text_gdiplus_v3', 'text_ft2_source', 'text_ft2_source_v2'];
     if(arr.indexOf( $('[name="obs_c_type"]', elm).val() ) >= 0) {
         param = { "sourceName" : "", "sourceType" : "", "sourceSettings" : { "text" : "" } }; 
         param.sourceName = $('[name="obs_c_name"]', elm).val();
